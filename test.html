@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test House</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .house-wall {
+            width: 100%;
+            height: 200px;
+            background: #8B4513;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .light {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: #FFD700;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .light.on {
+            background: #FFFF00;
+            box-shadow: 0 0 20px #FFFF00;
+        }
+        .door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 120px;
+            background: #654321;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.5s ease;
+        }
+        .door.open {
+            transform: translateX(-50%) rotateY(-45deg);
+        }
+        .window {
+            position: absolute;
+            top: 50px;
+            right: 30px;
+            width: 80px;
+            height: 60px;
+            background: #87CEEB;
+            border: 2px solid #654321;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .window.open {
+            background: #FFE4B5;
+            transform: scale(1.1);
+        }
+        .controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🏠 Simple House Test</h1>
+        
+        <div class="house-wall">
+            <div class="light" id="light"></div>
+            <div class="door" id="door"></div>
+            <div class="window" id="window"></div>
+        </div>
+        
+        <div class="controls">
+            <button id="lightBtn">Toggle Light</button>
+            <button id="doorBtn">Toggle Door</button>
+            <button id="windowBtn">Toggle Window</button>
+        </div>
+        
+        <div class="status" id="status">Ready to test!</div>
+    </div>
+
+    <script>
+        console.log('Test script loading...');
+        
+        let lightOn = false;
+        let doorOpen = false;
+        let windowOpen = false;
+        
+        const light = document.getElementById('light');
+        const door = document.getElementById('door');
+        const window = document.getElementById('window');
+        const status = document.getElementById('status');
+        
+        function updateStatus() {
+            status.textContent = `Light: ${lightOn ? 'ON' : 'OFF'} | Door: ${doorOpen ? 'OPEN' : 'CLOSED'} | Window: ${windowOpen ? 'OPEN' : 'CLOSED'}`;
+        }
+        
+        document.getElementById('lightBtn').addEventListener('click', () => {
+            console.log('Light button clicked!');
+            lightOn = !lightOn;
+            light.classList.toggle('on', lightOn);
+            updateStatus();
+        });
+        
+        document.getElementById('doorBtn').addEventListener('click', () => {
+            console.log('Door button clicked!');
+            doorOpen = !doorOpen;
+            door.classList.toggle('open', doorOpen);
+            updateStatus();
+        });
+        
+        document.getElementById('windowBtn').addEventListener('click', () => {
+            console.log('Window button clicked!');
+            windowOpen = !windowOpen;
+            window.classList.toggle('open', windowOpen);
+            updateStatus();
+        });
+        
+        updateStatus();
+        console.log('Test script loaded successfully!');
+    </script>
+</body>
+</html>
+
